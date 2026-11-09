@@ -1,0 +1,105 @@
+<h2>Editar Reserva</h2>
+
+<% if (locals.errores && errores.length > 0) { %>
+  <div role="alert" class="alert-errores">
+    <p><strong>Por favor corrija los siguientes errores:</strong></p>
+    <ul>
+      <% errores.forEach(error => { %>
+        <li><%= error %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
+<form action="/reservas/<%= reserva._id %>/editar" method="POST">
+  <div>
+    <label for="estudiante">Nombre del Estudiante:</label>
+    <input
+      type="text"
+      id="estudiante"
+      name="estudiante"
+      value="<%= locals.valores && valores.estudiante ? valores.estudiante : reserva.estudiante %>"
+    >
+  </div>
+
+  <div>
+    <label for="email">Correo Electrónico:</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      value="<%= locals.valores && valores.email ? valores.email : reserva.email %>"
+    >
+  </div>
+
+  <div>
+    <label for="sala">Sala:</label>
+    <select id="sala" name="sala">
+      <% ["Sala Norte", "Sala Sur", "Sala Multimedia"].forEach(sala => { %>
+        <option
+          value="<%= sala %>"
+          <%= (locals.valores && valores.sala === sala) || (!locals.valores && reserva.sala === sala) ? 'selected' : '' %>
+        >
+          <%= sala %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div>
+    <label for="fecha">Fecha:</label>
+    <input
+      type="date"
+      id="fecha"
+      name="fecha"
+      value="<%= locals.valores && valores.fecha ? valores.fecha : reserva.fecha %>"
+    >
+  </div>
+
+  <div>
+    <label for="turno">Turno:</label>
+    <select id="turno" name="turno">
+      <% ["Mañana", "Tarde", "Noche"].forEach(t => { %>
+        <option
+          value="<%= t %>"
+          <%= (locals.valores && valores.turno === t) || (!locals.valores && reserva.turno === t) ? 'selected' : '' %>
+        >
+          <%= t %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div>
+    <label for="personas">Cantidad de Personas (1-6):</label>
+    <input
+      type="number"
+      id="personas"
+      name="personas"
+      min="1"
+      max="6"
+      value="<%= locals.valores && valores.personas !== undefined ? valores.personas : reserva.personas %>"
+    >
+  </div>
+
+  <div>
+    <label for="estado">Estado:</label>
+    <select id="estado" name="estado">
+      <option
+        value="pendiente"
+        <%= (locals.valores && valores.estado === "pendiente") || (!locals.valores && reserva.estado === "pendiente") ? 'selected' : '' %>
+      >
+        pendiente
+      </option>
+      <option
+        value="confirmada"
+        <%= (locals.valores && valores.estado === "confirmada") || (!locals.valores && reserva.estado === "confirmada") ? 'selected' : '' %>
+      >
+        confirmada
+      </option>
+    </select>
+  </div>
+
+  <button type="submit">Guardar cambios</button>
+  <a href="/reservas">Cancelar</a>
+</form>

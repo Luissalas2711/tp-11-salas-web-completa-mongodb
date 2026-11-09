@@ -1,0 +1,37 @@
+<h2>Listado de Reservas</h2>
+
+<% if (reservas && reservas.length > 0) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Estudiante</th>
+        <th>Sala</th>
+        <th>Fecha</th>
+        <th>Turno</th>
+        <th>Personas</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reservas.forEach(reserva => { %>
+        <tr>
+          <td><%= reserva.id %></td>
+          <td><%= reserva.estudiante %></td>
+          <td><%= reserva.sala %></td>
+          <td><%= reserva.fecha %></td>
+          <td><%= reserva.turno %></td>
+          <td><%= reserva.personas %></td>
+          <td>
+            <a href="/reservas/<%= reserva.id %>">Ver detalle</a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p>No hay reservas registradas en el sistema.</p>
+<% } %>
+
+<br>
+<a href="/reservas/nueva">Crear una nueva reserva</a>

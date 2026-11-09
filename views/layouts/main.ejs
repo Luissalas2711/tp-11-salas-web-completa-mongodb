@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof titulo !== 'undefined' ? titulo : 'Gestión de Reservas' %></title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Sistema de Reservas</h1>
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/reservas">Listado de Reservas</a></li>
+        <li><a href="/reservas/nueva">Nueva Reserva</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <%- body %>
+  </main>
+
+  <footer>
+    <p>Área: <%= typeof seccion !== 'undefined' ? seccion : 'General' %></p>
+    <p>ID de Solicitud: <%= solicitudId %></p>
+  </footer>
+</body>
+</html>
